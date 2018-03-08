@@ -1,11 +1,20 @@
 <?php
-http_response_code(200);
-header('Content-Type: application/json');
-header('Status: 200 OK');
+function req_auto ($name) {
+	require ('src/tasks/'.$name.'.php');
+}
+spl_autoload_register ('req_auto');
 
-$response = array(
-	'status' => true,
-	'message' => 'Some message'
-);
+if (!empty($_POST)) {
+	$tasker = new TaskSlammer ($_POST);
+}
 
-echo json_encode($response);
+// http_response_code(200);
+// header('Content-Type: application/json');
+// header('Status: 200 OK');
+// 
+// $response = array(
+// 	'status' => true,
+// 	'message' => 'Some message'
+// );
+// 
+// echo json_encode($response);
