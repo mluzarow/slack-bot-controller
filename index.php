@@ -1,4 +1,6 @@
 <?php
+require ('src/TaskSlammer.php');
+
 function req_auto ($name) {
 	require ('src/tasks/'.$name.'.php');
 }
