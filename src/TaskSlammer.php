@@ -1,41 +1,56 @@
 <?php
-
+/**
+ * Controls startup of specific task objects.
+ */
 class TaskSlammer {
+	/**
+	 * @var string command keyword entered through slack
+	 */
 	private $command_key;
+	/**
+	 * @var string command arguments (everything after the command keyword)
+	 */
 	private $command_string;
 	
+	/**
+	 * @var array constant dictionary of commands to classes that process them.
+	 */
 	private $tasks = array (
 		'/test-command' => 'TestCommand'
 	);
 	
+	/**
+	 * Constructor for controller TaskSlammer.
+	 * 
+	 * @param array $post_data $_POST data
+	 */
 	public function __construct ($post_data) {
 		$this->setCommandData ($post_data);
+		$this->processCommand ();
 	}
-	/*
-		token=gIkuvaNzQIHg97ATvDxqgjtO
-		team_id=T0001
-		team_domain=example
-		enterprise_id=E0001
-		enterprise_name=Globular%20Construct%20Inc
-		channel_id=C2147483705
-		channel_name=test
-		user_id=U2147483697
-		user_name=Steve
-		command=/weather
-		text=94070
-		response_url=https://hooks.slack.com/commands/1234/5678
-		trigger_id=13345224609.738474920.8088930838d88f008e0
+	
+	/**
+	 * Sets command key and string properties.
+	 * 
+	 * @param array $post_data $_POST data
 	 */
 	private function setCommandData ($post_data) {
-		$command = trim ($post_data['command']);
-		
-		if (in_array ($command, array_keys ($this->tasks))) {
-			$task = new $this->tasks[$command] ();
+		$this->command_key = trim ($post_data['command']);
+		$this->command_string = trim ($post_data['text']);
+	}
+	
+	/**
+	 * Calls the command controller class corresponding to the command received.
+	 * Fires 400 - bad request if the command is not found.
+	 */
+	private function processCommand () {
+		if (in_array ($this->command_key, array_keys ($this->tasks))) {
+			$task = new $this->tasks[$this->command_key] ($this->command_string);
 		} else {
 			http_response_code(400);
 			header('Content-Type: text/html; charset=UTF-8');
 			header('Status: 400 Bad Request');
-			echo 'Command "'.$command[0].'" does not exist.';
+			echo 'Command "'.$this->command_key.'" does not exist.';
 		}
 	}
 }

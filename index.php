@@ -1,6 +1,5 @@
 <?php
 require ('src/TaskSlammer.php');
-// require ('src/tasks/TestCommand.php');
 
 function req_auto ($name) {
 	require ('src/tasks/'.$name.'.php');

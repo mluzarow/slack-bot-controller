@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Testing function just to make sure everything is working.
+ */
 class TestCommand {
 	public function __construct () {
 		http_response_code(200);
