@@ -5,7 +5,7 @@ class TaskSlammer {
 	private $command_string;
 	
 	private $tasks = array (
-		'test-command' => 'TestCommand'
+		'/test-command' => 'TestCommand'
 	);
 	
 	public function __construct ($post_data) {
