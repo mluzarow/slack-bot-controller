@@ -14,6 +14,9 @@ class TaskSlammer {
 	
 	private setCommandData ($post_data) {
 		if (empty($post_data)) {
+			http_response_code(400);
+			header('Content-Type: text/html; charset=UTF-8');
+			header('Status: 400 Bad Request');
 			echo 'There is no command data';
 		}
 		
@@ -22,6 +25,9 @@ class TaskSlammer {
 		if (in_array ($command[0], $this->tasks)) {
 			$task = new $this->tasks[$command[0]] ();
 		} else {
+			http_response_code(400);
+			header('Content-Type: text/html; charset=UTF-8');
+			header('Status: 400 Bad Request');
 			echo 'Command "'.$command[0].'" does not exist.';
 		}
 	}
