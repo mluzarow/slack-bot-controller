@@ -8,7 +8,7 @@ class TaskSlammer {
 		'test-command' => 'TestCommand'
 	);
 	
-	public __construct ($post_data) {
+	public function __construct ($post_data) {
 		$this->setCommandData ($post_data);
 	}
 	
@@ -20,7 +20,7 @@ class TaskSlammer {
 		$command = explode (' ', $post_data);
 		
 		if (in_array ($command[0], $this->tasks)) {
-			$task = new ${$this->tasks[$command[0]]} ();
+			$task = new $this->tasks[$command[0]] ();
 		} else {
 			throw new InvalidArgumentException ('Command "'.$command[0].'" does not exist.');
 		}
