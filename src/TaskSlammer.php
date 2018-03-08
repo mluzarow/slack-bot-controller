@@ -12,7 +12,7 @@ class TaskSlammer {
 		$this->setCommandData ($post_data);
 	}
 	
-	private setCommandData ($post_data) {
+	private function setCommandData ($post_data) {
 		if (empty($post_data)) {
 			http_response_code(400);
 			header('Content-Type: text/html; charset=UTF-8');
