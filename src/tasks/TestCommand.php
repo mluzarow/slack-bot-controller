@@ -9,6 +9,7 @@ class TestCommand {
 		header('Status: 200 OK');
 		
 		$response = array(
+			'response_type' => 'in_channel',
 			'text' => 'Everything worked!'
 		);
 		
