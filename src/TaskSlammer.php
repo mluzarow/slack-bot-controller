@@ -16,7 +16,8 @@ class TaskSlammer {
 	 * @var array constant dictionary of commands to classes that process them.
 	 */
 	private $tasks = array (
-		'/test-command' => 'TestCommand'
+		'/test-command' => 'TestCommand',
+		'/choose' => 'ChooseOne'
 	);
 	
 	/**
