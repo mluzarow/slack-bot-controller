@@ -2,17 +2,8 @@
 /**
  * Testing function just to make sure everything is working.
  */
-class TestCommand {
+class TestCommand extends GenericTask {
 	public function __construct () {
-		http_response_code(200);
-		header('Content-Type: application/json');
-		header('Status: 200 OK');
-		
-		$response = array(
-			'response_type' => 'in_channel',
-			'text' => 'Everything worked!'
-		);
-		
-		echo json_encode($response);
+		$this->textResponse ('Everything worked!');
 	}
 }
