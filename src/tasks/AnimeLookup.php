@@ -15,9 +15,7 @@ class AnimeLookup extends GenericTask {
 		}
 		
 		$json_data = $this->requestAnimeList ();
-		// $r = $this->processAnimes ($json_data);
-		
-		$this->textResponse ($json_data);
+		$this->processAnimes ($json_data);
 	}
 	
 	private function setQueryString ($string) {
@@ -32,8 +30,6 @@ class AnimeLookup extends GenericTask {
 		$curl = curl_init ();
 		
 		curl_setopt ($curl, CURLOPT_URL, $this->api_url);
-		// curl_setopt ($curl, CURLOPT_POST, 0);
-		// curl_setopt ($curl, CURLOPT_POSTFIELDS, '');
 		curl_setopt ($curl, CURLOPT_RETURNTRANSFER, true);
 		
 		$response = curl_exec ($curl);
@@ -53,8 +49,20 @@ class AnimeLookup extends GenericTask {
 		$result = $result[0];
 		
 		$slack_response = array (
-			
+			'attachments' => array(
+				'fallback' => 'Fallback text',
+				'image_url' => $result['image_url'];
+				'title' => $result['title'];
+				'text' => $result['description'];
+			)
 		);
 		
+		$response = json_encode($slack_response);
+		
+		http_response_code(200);
+		header('Content-Type: application/json');
+		header('Status: 200 OK');
+		
+		echo $response;
 	}
 }
