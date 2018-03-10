@@ -42,8 +42,9 @@ class AnimeLookup extends GenericTask {
 	private function processAnimes ($json_data) {
 		$result = json_decode ($json_data);
 		
-		if (!isset ($result[0])) {
-			// error
+		if (!isset ($result['result'][0])) {
+			$this->textResponse ("No data");
+			return;
 		}
 		
 		$result = $result['result'][0];
