@@ -25,7 +25,7 @@ class AnimeLookup extends GenericTask {
 			return ('Command requires argument in the form of a query. E.G. /anime black lagoon');
 		}
 		
-		$this->api_url = 'http://api.jikan.me/anime/"'.$string.'"/1';
+		$this->api_url = 'http://api.jikan.me/search/anime/'.$string.'/1';
 	}
 	
 	private function requestAnimeList () {
