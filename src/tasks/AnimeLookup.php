@@ -15,8 +15,7 @@ class AnimeLookup extends GenericTask {
 		}
 		
 		$json_data = $this->requestAnimeList ();
-		$this->textResponse ($json_data);
-		//$this->processAnimes ($json_data);
+		$this->processAnimes ($json_data);
 	}
 	
 	private function setQueryString ($string) {
@@ -41,7 +40,7 @@ class AnimeLookup extends GenericTask {
 	}
 	
 	private function processAnimes ($json_data) {
-		$result = json_decode ($json_data);
+		$result = json_decode ($json_data, true);
 		
 		if (!isset ($result['result'][0])) {
 			$this->textResponse ("No data");
