@@ -46,9 +46,10 @@ class AnimeLookup extends GenericTask {
 			// error
 		}
 		
-		$result = $result[0];
+		$result = $result['result'][0];
 		
 		$slack_response = array (
+			'response_type' => 'in_channel',
 			'attachments' => array (
 				array (
 					'fallback' => 'Fallback text',
