@@ -15,7 +15,8 @@ class AnimeLookup extends GenericTask {
 		}
 		
 		$json_data = $this->requestAnimeList ();
-		$this->processAnimes ($json_data);
+		$this->textResponse ($json_data);
+		//$this->processAnimes ($json_data);
 	}
 	
 	private function setQueryString ($string) {
