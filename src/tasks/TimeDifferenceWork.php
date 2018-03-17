@@ -4,13 +4,13 @@
  */
 class TimeDifferenceWork extends GenericTask {
 	/**
-	 * @var Date time as of firing this command in timezone UTC
+	 * @var DateTime time as of firing this command in timezone UTC
 	 */
 	private $current_time;
 	/**
-	 * @var Date time at which work ends (4:30 PM)
+	 * @var DateTime time at which work ends (4:30 PM)
 	 */
-	private $end_time = date ('h:i:s A', mkdate (16, 30, 0));
+	private $end_time;
 	
 	/**
 	 * Constructor for task controller TimeDifferenceWork.
@@ -27,9 +27,10 @@ class TimeDifferenceWork extends GenericTask {
 	 */
 	private function setTime () {
 		// Set the default timezone to use.
-		date_default_timezone_set('UTC');
+		date_default_timezone_set('America/Chicago');
 		
-		$this->current_time = date ('h:i:s A');
+		$this->end_time = new DateTime ('16:30:00');
+		$this->current_time = new DateTime ('now');
 	}
 	
 	/**
@@ -38,8 +39,8 @@ class TimeDifferenceWork extends GenericTask {
 	 * @return string formatted time remaining
 	 */
 	private function calcTime () {
-		$remaining_time = $this->end_time - $this->current_time;
+		$remaining_time = $this->current_time->diff ($this->end_time);
 		
-		return ($remaining_time);
+		return ($remaining_time->format ('%H hrs %I mins %S sec'));
 	}
 }
