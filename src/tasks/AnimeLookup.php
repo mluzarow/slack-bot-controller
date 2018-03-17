@@ -1,10 +1,18 @@
 <?php
 /**
- * Chooses a single option from a list of comma seperated items.
+ * Performs a lookup via the unofficial MAL API, Jikan.
  */
 class AnimeLookup extends GenericTask {
+	/**
+	 * @var string constructed URL to use when hitting the Jikan endpoint
+	 */
 	private $api_url;
 	
+	/**
+	 * Constructor for task controller AnimeLookup.
+	 * 
+	 * @param string $string text part of the command
+	 */
 	public function __construct ($string) {
 		$e = $this->setQueryString ($string);
 		
@@ -18,6 +26,11 @@ class AnimeLookup extends GenericTask {
 		$this->processAnimes ($json_data);
 	}
 	
+	/**
+	 * Constructs the endpoint URL.
+	 * 
+	 * @param string $string user's anime query
+	 */
 	private function setQueryString ($string) {
 		if (empty (trim ($string))) {
 			return ('Command requires argument in the form of a query. E.G. /anime black lagoon');
@@ -26,6 +39,11 @@ class AnimeLookup extends GenericTask {
 		$this->api_url = 'http://api.jikan.me/search/anime/'.urlencode ($string).'/1';
 	}
 	
+	/**
+	 * Hits the Jikan endpoint and gives back the JSON response.
+	 * 
+	 * @return string JSON formatted response string
+	 */
 	private function requestAnimeList () {
 		$curl = curl_init ();
 		
@@ -39,6 +57,13 @@ class AnimeLookup extends GenericTask {
 		return ($response);
 	}
 	
+	/**
+	 * Processes the Jikan response JSON into a Slack-readable response.
+	 * 
+	 * @param string $json_data Jikan API response in JSON format
+	 * 
+	 * @return array Slack response
+	 */
 	private function processAnimes ($json_data) {
 		$result = json_decode ($json_data, true);
 		
