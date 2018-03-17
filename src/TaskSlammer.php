@@ -48,7 +48,20 @@ class TaskSlammer {
 	 */
 	private function processCommand () {
 		if (in_array ($this->command_key, array_keys ($this->tasks))) {
-			$task = new $this->tasks[$this->command_key] ($this->command_string);
+			try {
+				$task = new $this->tasks[$this->command_key] ($this->command_string);
+			} catch (Exception $e) {
+				$response = array(
+					'text' => $e->getMessage ()
+				);
+				$response = json_encode($response);
+				
+				http_response_code(200);
+				header('Content-Type: application/json');
+				header('Status: 200 OK');
+				
+				echo $respose;
+			}
 		} else {
 			http_response_code(400);
 			header('Content-Type: text/html; charset=UTF-8');
