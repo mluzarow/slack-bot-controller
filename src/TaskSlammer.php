@@ -18,7 +18,7 @@ class TaskSlammer {
 	private $tasks = array (
 		'/test-command' => 'TestCommand',
 		'/choose' => 'ChooseOne',
-		'/anime' => 'AnimeLookup'
+		'/anime' => 'AnimeLookup',
 		'/timeleft' => 'TimeDifferenceWork'
 	);
 	
