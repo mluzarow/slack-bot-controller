@@ -19,7 +19,8 @@ class TaskSlammer {
 		'/test-command' => 'TestCommand',
 		'/choose' => 'ChooseOne',
 		'/anime' => 'AnimeLookup',
-		'/timeleft' => 'TimeDifferenceWork'
+		'/timeleft' => 'TimeDifferenceWork',
+		'/text-reverse' => 'TextReverse'
 	);
 	
 	/**
