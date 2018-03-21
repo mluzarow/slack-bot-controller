@@ -33,7 +33,7 @@ class TextReverse extends GenericTask {
 	 *
 	 * @return string|void error string or void if successful
 	 */
-	private function setItems ($string) {
+	private function setText ($string) {
 		if (empty ($string)) {
 			return ('Command requires argument in the form of a string to be reversed.');
 		}
