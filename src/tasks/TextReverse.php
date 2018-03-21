@@ -34,17 +34,13 @@ class TextReverse extends GenericTask {
 	 * @return string|void error string or void if successful
 	 */
 	private function setText ($string) {
+		$string = trim ($string);
+		
 		if (empty ($string)) {
 			return ('Command requires argument in the form of a string to be reversed.');
 		}
 		
-		$string = trim ($string);
-		
-		if (!empty ($string)) {
-			$this->text = $string;
-		} else {
-			return ('No text on which to act.');
-		}
+		$this->text = $string;
 	}
 	
 	private function reverseText () {
